@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cars
   - Ground
+  - Diamonds
   layers:
   - Default
   - TransparentFX

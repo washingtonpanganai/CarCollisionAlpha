@@ -274,10 +274,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   turnSpeed: 5
+  explosionParticle: {fileID: 0}
+  coin: {fileID: 0}
+  crashSound: {fileID: 0}
   horizontalInput: 0
   forwardInput: 0
   leftBoundary: -20
   rightBoundary: 58
+  gameOver: 0
 --- !u!65 &311638757
 BoxCollider:
   m_ObjectHideFlags: 0

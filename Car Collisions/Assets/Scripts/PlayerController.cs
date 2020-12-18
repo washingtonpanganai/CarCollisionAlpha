@@ -6,11 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
     public float turnSpeed;
+    private AudioSource playerAudio;
+    public ParticleSystem explosionParticle;
+    public AudioClip coin;
+    public AudioClip crashSound;
     public float horizontalInput;
     public float forwardInput;
     public float leftBoundary = -20f;
     public float rightBoundary = 58f;
     public bool isOnGround = false;
+    
     public bool gameOver;
     
     
@@ -18,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,18 +46,32 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Diamonds"))
+        {
+            
+            Destroy(other.gameObject);
+        }
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
-      
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                isOnGround = true;
-            } else if (collision.gameObject.CompareTag("cars"))
-            {
 
-                Debug.Log("Game Over");
-                gameOver = true;
-            }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+        else if (collision.gameObject.CompareTag("cars"))
+        {
+
+           Debug.Log("Game Over");
+           gameOver = true;
+           explosionParticle.Play();
+           playerAudio.PlayOneShot(crashSound, 1.0f);
+        }
+
     }
         
 }
